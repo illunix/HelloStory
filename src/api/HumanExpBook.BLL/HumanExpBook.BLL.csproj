@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoDependencyInjection" Version="1.0.2" />
+    <PackageReference Include="EnyimMemcachedCore" Version="2.5.4" />
+    <PackageReference Include="FluentValidation" Version="11.2.0" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.22.0" />
+    <PackageReference Include="Riok.Mapperly" Version="2.3.4-next.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0-preview.4.22224.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HumanExpBook.API.CodeGeneration\HumanExpBook.API.CodeGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\HumanExpBook.BLL.Interfaces\HumanExpBook.BLL.Interfaces.csproj" />
+    <ProjectReference Include="..\HumanExpBook.Common\HumanExpBook.Common.csproj" />
+    <ProjectReference Include="..\HumanExpBook.DAL\HumanExpBook.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Mappers\" />
+    <Folder Include="Queries\" />
+    <Folder Include="QueryHandlers\" />
+  </ItemGroup>
+
+</Project>
