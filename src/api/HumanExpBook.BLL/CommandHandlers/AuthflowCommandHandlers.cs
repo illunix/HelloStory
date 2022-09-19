@@ -83,7 +83,7 @@ public sealed partial class AuthflowCommandHandlers :
         return Results.Ok(req.CurrentUserId);
     }
 
-    [HttpPost("token/revoke")]
+    [HttpDelete("token/revoke")]
     public async Task<IResult> Handle(
         RevokeRefreshTokenCommand req,
         CancellationToken ct

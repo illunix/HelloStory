@@ -15,7 +15,7 @@ public sealed partial class UserCommandHandlers :
 {
     private readonly InternalDbContext _ctx;
 
-    [HttpGet]
+    [HttpPost]
     public async Task<IResult> Handle(
         SignUpCommand req,
         CancellationToken ct

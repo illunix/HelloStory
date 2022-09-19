@@ -2,8 +2,10 @@
 
 namespace HumanExpBook.DAL.Entities;
 
-public sealed record Post(
+public sealed record Comment(
+    Guid PostId,
     Guid UserId,
+    Guid? ParentCommentId,
     string Content
 ) : EntityBase
 {

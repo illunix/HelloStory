@@ -1,4 +1,4 @@
-﻿using HumanExpBook.BLL.Commands.Posts;
+﻿using HumanExpBook.BLL.Commands.Comments;
 using HumanExpBook.BLL.Exceptions;
 using HumanExpBook.BLL.Interfaces;
 using HumanExpBook.DAL.Context;
@@ -8,21 +8,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HumanExpBook.BLL.CommandHandlers;
 
-public sealed partial class PostsCommandHandlers :
-    IHttpRequestHandler<CreatePostCommand>,
-    IHttpRequestHandler<UpdatePostCommand>,
-    IHttpRequestHandler<DeletePostCommand>
+public sealed partial class CommentsCommandHandlers :
+    IHttpRequestHandler<CreateCommentCommand>,
+    IHttpRequestHandler<UpdateCommentCommand>,
+    IHttpRequestHandler<DeleteCommentCommand>
 {
     private readonly InternalDbContext _ctx;
 
     [HttpPost]
     public async Task<IResult> Handle(
-        CreatePostCommand req,
+        CreateCommentCommand req,
         CancellationToken ct
     )
     {
-        _ctx.Add(new Post(
+        _ctx.Add(new Comment(
+            req.PostId,
             req.CurrentUserId,
+            req.ParentCommentId,
             req.Content
         ));
 
@@ -33,18 +35,18 @@ public sealed partial class PostsCommandHandlers :
 
     [HttpPut]
     public async Task<IResult> Handle(
-        UpdatePostCommand req,
+        UpdateCommentCommand req,
         CancellationToken ct
     )
     {
-        var post = await _ctx.Posts.FindAsync(req.Id);
-        if (post is null)
-            throw new EntitityNotFoundException(nameof(Post));
+        var comment = await _ctx.Comments.FindAsync(req.Id);
+        if (comment is null)
+            throw new EntitityNotFoundException(nameof(Comment));
 
-        _ctx.Update(post with 
-        { 
+        _ctx.Update(comment with
+        {
             Content = req.Content,
-            IsEdited = true 
+            IsEdited = true
         });
 
         await _ctx.SaveChangesAsync();
@@ -54,15 +56,15 @@ public sealed partial class PostsCommandHandlers :
 
     [HttpDelete]
     public async Task<IResult> Handle(
-        DeletePostCommand req,
+        DeleteCommentCommand req,
         CancellationToken ct
     )
     {
-        var post = await _ctx.Posts.FindAsync(req.Id);
-        if (post is null)
-            throw new EntitityNotFoundException(nameof(Post));
+        var comment = await _ctx.Comments.FindAsync(req.Id);
+        if (comment is null)
+            throw new EntitityNotFoundException(nameof(Comment));
 
-        _ctx.Remove(post);
+        _ctx.Remove(comment);
 
         await _ctx.SaveChangesAsync();
 

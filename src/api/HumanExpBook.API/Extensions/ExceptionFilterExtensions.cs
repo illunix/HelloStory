@@ -14,7 +14,7 @@ internal static class ExceptionFilterExtensions
     {
         return exception switch
         {
-            NotFoundException _ => (
+            EntitityNotFoundException _ => (
                 HttpStatusCode.NotFound,
                 ErrorCode.NotFound
             ),
