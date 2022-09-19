@@ -1,5 +1,5 @@
 ﻿using HumanExpBook.BLL.Commands.Authflow;
-using HumanExpBook.BLL.Exceptions.Auth;
+using HumanExpBook.BLL.Exceptions.Authflow;
 using HumanExpBook.BLL.Exceptions;
 using HumanExpBook.BLL.Interfaces;
 using HumanExpBook.Common.Security;
@@ -70,12 +70,12 @@ public sealed partial class AuthflowCommandHandlers :
         CancellationToken ct
     )
     {
-        var refreshToken = await _cache.GetAsync(req.CurrentUserId);
+        var refreshToken = await _cache.GetAsync(req.CurrentUserId.ToString());
         if (refreshToken is null)
             throw new InvalidRefreshTokenException();
 
         _cache.Add(
-            req.CurrentUserId,
+            req.CurrentUserId.ToString(),
             _tokenService.GenerateRefreshToken(),
             (int)_options.Value.ValidFor.TotalSeconds
         );
@@ -83,17 +83,17 @@ public sealed partial class AuthflowCommandHandlers :
         return Results.Ok(req.CurrentUserId);
     }
 
-    [HttpPost("token/revoke")]
+    [HttpDelete("token/revoke")]
     public async Task<IResult> Handle(
         RevokeRefreshTokenCommand req,
         CancellationToken ct
     )
     {
-        var refreshToken = await _cache.GetAsync(req.CurrentUserId);
+        var refreshToken = await _cache.GetAsync(req.CurrentUserId.ToString());
         if (refreshToken is null)
             throw new InvalidRefreshTokenException();
 
-        await _cache.RemoveAsync(req.CurrentUserId);
+        await _cache.RemoveAsync(req.CurrentUserId.ToString());
 
         return Results.Ok();
     }

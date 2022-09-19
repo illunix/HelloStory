@@ -1,6 +1,6 @@
 ﻿using HumanExpBook.API.Enums;
 using HumanExpBook.BLL.Exceptions;
-using HumanExpBook.BLL.Exceptions.Auth;
+using HumanExpBook.BLL.Exceptions.Authflow;
 using System.Net;
 
 namespace HumanExpBook.API.Extensions;
@@ -14,9 +14,13 @@ internal static class ExceptionFilterExtensions
     {
         return exception switch
         {
-            NotFoundException _ => (
+            EntitityNotFoundException _ => (
                 HttpStatusCode.NotFound,
-                ErrorCode.NotFound
+                ErrorCode.EntityNotFound
+            ),
+            EntityWithSamePropertyValueAlreadyExistException _ => (
+                HttpStatusCode.Conflict,
+                ErrorCode.EntityWithSamePropertyValueAlreadyExist
             ),
             InvalidCredentialsException _ => (
                 HttpStatusCode.Unauthorized, 

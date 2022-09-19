@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
     <PackageReference Include="AutoDependencyInjection" Version="1.0.2" />
     <PackageReference Include="EnyimMemcachedCore" Version="2.5.4" />
     <PackageReference Include="FluentValidation" Version="11.2.0" />
