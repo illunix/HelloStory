@@ -6,6 +6,7 @@ namespace HumanExpBook.DAL.Context;
 public sealed class InternalDbContext : DbContext
 {
     public DbSet<User> Users { get; init; }
+    public DbSet<UserFollow> UserFollows { get; init; }
     public DbSet<Post> Posts { get; init; }
     public DbSet<Comment> Comments { get; init; }
 

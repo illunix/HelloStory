@@ -72,14 +72,13 @@ internal class SourceGenerator : ISourceGenerator
 
                 var handlerName = method.ContainingType.Name
                     .Replace(
-                        "CommandHandlers", 
+                        "CommandHandlers",
                         ""
                     )
                     .Replace(
                         "QueryHandlers",
                         ""
-                    )
-                    .PascalToKebabCase();
+                    );
 
                 var requestName = "";
 
@@ -88,12 +87,16 @@ internal class SourceGenerator : ISourceGenerator
                     requestName = httpAttr.ConstructorArguments.FirstOrDefault().Value!.ToString();
                 }
                 else if (
-                    !requestTypeType.Name.StartsWith("Get") || 
-                    !requestTypeType.Name.StartsWith("GetAll") ||
-                    !requestTypeType.Name.StartsWith("Create") ||
-                    !requestTypeType.Name.StartsWith("Update") ||
-                    !requestTypeType.Name.StartsWith("Delete") 
+                    requestTypeType.Name.StartsWith("Get") ||
+                    requestTypeType.Name.StartsWith("GetAll") ||
+                    requestTypeType.Name.StartsWith("Create") ||
+                    requestTypeType.Name.StartsWith("Update") ||
+                    requestTypeType.Name.StartsWith("Delete")
                 )
+                {
+                    requestName = "";
+                }
+                else
                 {
                     requestName = requestTypeType.Name
                         .Replace(
@@ -107,7 +110,7 @@ internal class SourceGenerator : ISourceGenerator
                         .PascalToKebabCase();
                 }
 
-                var route = $"{handlerName}/{requestName}";
+                var route = $"{handlerName.PascalToKebabCase()}/{requestName}";
 
                 var getCurrentUser = requestTypeType.GetMembers().Any(q => q.Name == "CurrentUserId");
 
@@ -119,7 +122,7 @@ internal class SourceGenerator : ISourceGenerator
                 IMediator mediator
             )
                 => await mediator.Send(req{(getCurrentUser ? @" with { CurrentUserId = Guid.Parse(user.Claims.FirstOrDefault(q => q.Type == ClaimTypes.NameIdentifier).Value)}" : "")})
-            ){(validate ? ";" : $".AddEndpointFilter<ValidationFilter<{requestTypeType}>>();")}"
+            ){(validate ? "" : $".AddEndpointFilter<ValidationFilter<{requestTypeType}>>()")}.WithTags(""{handlerName}"");"
                 );
             }
 
