@@ -1,6 +1,6 @@
 ﻿using HumanExpBook.API.Enums;
 using HumanExpBook.BLL.Exceptions;
-using HumanExpBook.BLL.Exceptions.Auth;
+using HumanExpBook.BLL.Exceptions.Authflow;
 using System.Net;
 
 namespace HumanExpBook.API.Extensions;

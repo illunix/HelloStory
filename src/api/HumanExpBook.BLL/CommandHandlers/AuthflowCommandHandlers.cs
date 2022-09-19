@@ -1,5 +1,5 @@
 ﻿using HumanExpBook.BLL.Commands.Authflow;
-using HumanExpBook.BLL.Exceptions.Auth;
+using HumanExpBook.BLL.Exceptions.Authflow;
 using HumanExpBook.BLL.Exceptions;
 using HumanExpBook.BLL.Interfaces;
 using HumanExpBook.Common.Security;

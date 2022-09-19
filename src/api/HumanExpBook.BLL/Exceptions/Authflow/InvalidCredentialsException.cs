@@ -1,4 +1,4 @@
-﻿namespace HumanExpBook.BLL.Exceptions.Auth;
+﻿namespace HumanExpBook.BLL.Exceptions.Authflow;
 
 public sealed class InvalidCredentialsException : Exception
 {
