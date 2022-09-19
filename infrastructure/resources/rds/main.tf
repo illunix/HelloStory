@@ -15,7 +15,7 @@ resource "aws_db_instance" "main" {
   storage_type            = "standard"
   engine                  = "postgres"
   instance_class          = "db.t3.small"
-  db_name                 = "BuySubs"
+  db_name                 = "HumanExpLib"
   username                = "foo"
   password                = "baregeogoevne"
   vpc_security_group_ids  = [module.vpc.aws_security_group_allow_all_id]
