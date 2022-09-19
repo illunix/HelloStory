@@ -16,7 +16,11 @@ internal static class ExceptionFilterExtensions
         {
             EntitityNotFoundException _ => (
                 HttpStatusCode.NotFound,
-                ErrorCode.NotFound
+                ErrorCode.EntityNotFound
+            ),
+            EntityWithSamePropertyValueAlreadyExistException _ => (
+                HttpStatusCode.Conflict,
+                ErrorCode.EntityWithSamePropertyValueAlreadyExist
             ),
             InvalidCredentialsException _ => (
                 HttpStatusCode.Unauthorized, 

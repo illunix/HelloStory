@@ -3,7 +3,8 @@
 public enum ErrorCode
 {
     General = 1,
-    NotFound,
+    EntityNotFound,
+    EntityWithSamePropertyValueAlreadyExist,
     InvalidCredentials,
     InvalidToken,
     ExpiredRefreshToken,
