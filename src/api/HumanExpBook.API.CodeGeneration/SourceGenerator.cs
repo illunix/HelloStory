@@ -110,7 +110,7 @@ internal class SourceGenerator : ISourceGenerator
                         .PascalToKebabCase();
                 }
 
-                var route = $"{handlerName.PascalToKebabCase()}/{requestName}";
+                var route = $"api/{handlerName.PascalToKebabCase()}/{requestName}";
 
                 var getCurrentUser = requestTypeType.GetMembers().Any(q => q.Name == "CurrentUserId");
 
