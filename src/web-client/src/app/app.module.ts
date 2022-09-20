@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthModule } from './modules/auth/auth.module';
 import { MainViewModule } from './modules/main-view/main-view.module';
 import { JwtInterceptor, ErrorInterceptor } from './core/interceptors';
 
@@ -12,6 +13,7 @@ import { JwtInterceptor, ErrorInterceptor } from './core/interceptors';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AuthModule,
     MainViewModule,
     AppRoutingModule
   ],

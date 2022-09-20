@@ -12,26 +12,20 @@ import { UserService } from '@app/core/services/user.service';
 export class AppComponent implements OnInit, OnDestroy {
   public authorizedUser: UserModel;
   private _unsubscribe$ = new Subject<void>();
-  
+
   constructor(
     private _eventService: EventService,
     private _userService: UserService
   ) { }
 
   public ngOnInit(): void {
-    /*
     this._eventService.userChangedEvent$
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe(q => (this.authorizedUser = q ? this._userService.copyUser(q) : undefined));
-    */
   }
 
   public ngOnDestroy(): void {
     this._unsubscribe$.next();
     this._unsubscribe$.complete();
-  }
-
-  private getUser() {
-
   }
 }

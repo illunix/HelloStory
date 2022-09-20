@@ -1,1 +1,6 @@
-<app-main-view></app-main-view>
+<div *ngIf="!authorizedUser">
+    <app-auth></app-auth>
+</div>
+<div *ngIf="authorizedUser">
+    <app-main-view></app-main-view>
+</div>
