@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { SignUpModel } from "../models/auth/sign-up.model";
-import { UserModel } from "../models/auth/user.model";
-import { HttpInternalService } from "./http-internal.service";
+import { SignUpModel } from "../models/user";
+import { UserModel } from "../models/auth";
+import { HttpInternalService } from "./";
 
 @Injectable({providedIn: 'root'})
 export class UserService {

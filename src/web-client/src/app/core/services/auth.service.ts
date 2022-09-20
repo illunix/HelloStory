@@ -11,7 +11,7 @@ import { AuthResponseModel } from '../models/auth/auth-response.model';
 import { AccessTokenModel } from '../models/auth/access-token.model';
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class AuthService {
     private _routePrefix = '/api/authflow';
     private _user: UserModel;
 
@@ -66,6 +66,10 @@ export class AuthenticationService {
             `${this._routePrefix}/token/revoke`,
             { accessToken: JSON.parse(localStorage.getItem('accessToken')) }
         );
+    }
+
+    public areAccessTokensExist(): string {
+        return localStorage.getItem('accessToken'); 
     }
 
     private handleAuthResponse(observable: Observable<HttpResponse<AuthResponseModel>>) {
