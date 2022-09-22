@@ -1,0 +1,11 @@
+{
+  "profile": "vipersniper",
+  "region": "eu-west-2",
+  "configuration": "Release",
+  "function-name": "hello-story-authflow-api",
+  "function-runtime": "dotnet6",
+  "function-memory-size": 256,
+  "function-timeout": 30,
+  "function-handler": "HelloStory.Authflow.API",
+  "function-url-enable": true
+}
