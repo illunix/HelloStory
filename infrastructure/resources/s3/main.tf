@@ -26,6 +26,7 @@ resource "aws_s3_bucket" "hello_story" {
   bucket = random_pet.lambda_bucket_name.id
 }
 
+#region hello_story_api_gateway
 data "archive_file" "lambda_hello_story_api_gateway" {
   type = "zip"
 
@@ -41,7 +42,9 @@ resource "aws_s3_object" "lambda_hello_story_api_gateway" {
 
   etag = filemd5(data.archive_file.lambda_hello_story_api_gateway.output_path)
 }
+#endregion
 
+#region hello_story_authflow_api
 data "archive_file" "lambda_hello_story_authflow_api" {
   type = "zip"
 
@@ -57,3 +60,4 @@ resource "aws_s3_object" "lambda_hello_story_authflow_api" {
 
   etag = filemd5(data.archive_file.lambda_hello_story_authflow_api.output_path)
 }
+#endregion

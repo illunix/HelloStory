@@ -20,6 +20,7 @@ module "iam" {
   source = "../iam"
 }
 
+#region hello_story_api_gateway
 resource "aws_lambda_function" "hello_story_api_gateway" {
   function_name = "hello-story-api-gateway"
 
@@ -40,7 +41,9 @@ resource "aws_lambda_function_url" "hello_story_api_gateway" {
   function_name      = aws_lambda_function.hello_story_api_gateway.function_name
   authorization_type = "NONE"
 }
+#endregion
 
+#region hello_story_authflow_api
 resource "aws_lambda_function" "hello_story_authflow_api" {
   function_name = "hello-story-authflow-api"
 
@@ -61,3 +64,4 @@ resource "aws_lambda_function_url" "hello_story_authflow_api" {
   function_name      = aws_lambda_function.hello_story_authflow_api.function_name
   authorization_type = "NONE"
 }
+#endregion

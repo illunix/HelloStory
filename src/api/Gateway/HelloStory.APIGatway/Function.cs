@@ -41,14 +41,14 @@ internal sealed class Function
 
         return new()
         {
-            PrincipalID = claimsPrincipal == null ? "401" : claimsPrincipal()?.FindFirst(ClaimTypes.NameIdentifier)?.Value,
+            PrincipalID = claimsPrincipal() == null ? "401" : claimsPrincipal()?.FindFirst(ClaimTypes.NameIdentifier)?.Value,
             PolicyDocument = new()
             {
                 Statement = new()
                 {
                     new()
                     {
-                        Effect = claimsPrincipal is null ? "Deny" : "Allow",
+                        Effect = claimsPrincipal() is null ? "Deny" : "Allow",
                         Resource = new HashSet<string> { "arn:aws:execute-api:ap-south-1:821175633958:sctmtm1ge8/*/*" },
                         Action = new HashSet<string> { "execute-api:Invoke" }
                     }
