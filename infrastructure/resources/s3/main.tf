@@ -21,7 +21,7 @@ data "archive_file" "lambda_hello_story_authflow_api" {
   type = "zip"
 
   source_dir  = "${path.module}/../../../src/api/Features/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64"
-  output_path = "${path.module}/../../../src/api/Features/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64/bin.zip"
+  output_path = "${path.module}/../../../src/api/Features/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64.zip"
 }
 
 resource "aws_s3_object" "lambda_hello_story_authflow_api" {
