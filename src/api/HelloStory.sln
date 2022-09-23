@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIGateway", "APIGateway", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{9158B2CB-4D63-4E8E-B0C9-7C4D454471E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloStory.APIGatway", "gateway\HelloStory.APIGatway\HelloStory.APIGatway.csproj", "{AC9F18FE-C10C-41CC-984A-6853748897DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloStory.APIGatwayAuthorizer", "gateway\HelloStory.APIGatway\HelloStory.APIGatwayAuthorizer.csproj", "{AC9F18FE-C10C-41CC-984A-6853748897DA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authflow", "Authflow", "{4AFD02EA-9320-45AB-8D72-6B99BF0504BB}"
 EndProject
