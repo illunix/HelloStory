@@ -20,10 +20,31 @@ module "iam" {
   source = "../iam"
 }
 
+resource "aws_lambda_function" "hello_story_api_gateway" {
+  function_name = "hello-story-api-gateway"
+
+  s3_bucket = module.s3.aws_s3_bucket_hello_story.id
+  s3_key    = module.s3.aws_s3_object_lambda_hello_story_api_gateway.key
+
+  runtime = "dotnet6"
+  handler = "HelloStory.APIGatway::HelloStory.APIGatway.Function::Handler"
+  memory_size = 256
+  timeout = 30
+
+  source_code_hash = module.s3.data_archive_file_lambda_hello_story_api_gateway.output_base64sha256
+
+  role = module.iam.aws_iam_role_lambda_exec_arn
+}
+
+resource "aws_lambda_function_url" "hello_story_api_gateway" {
+  function_name      = aws_lambda_function.hello_story_api_gateway.function_name
+  authorization_type = "NONE"
+}
+
 resource "aws_lambda_function" "hello_story_authflow_api" {
   function_name = "hello-story-authflow-api"
 
-  s3_bucket = module.s3.aws_s3_bucket_hello_story_authflow_api.id
+  s3_bucket = module.s3.aws_s3_bucket_hello_story.id
   s3_key    = module.s3.aws_s3_object_lambda_hello_story_authflow_api.key
 
   runtime = "dotnet6"

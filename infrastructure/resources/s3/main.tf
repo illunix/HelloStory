@@ -17,6 +17,31 @@ terraform {
   required_version = "~> 1.0"
 }
 
+resource "random_pet" "lambda_bucket_name" {
+  prefix = "hello-story-lambdas"
+  length = 4
+}
+
+resource "aws_s3_bucket" "hello_story" {
+  bucket = random_pet.lambda_bucket_name.id
+}
+
+data "archive_file" "lambda_hello_story_api_gateway" {
+  type = "zip"
+
+  source_dir  = "${path.module}/../../../src/api/Gateway/HelloStory.APIGatway/bin/Release/net6.0/linux-x64"
+  output_path = "${path.module}/../../../src/api/Gateway/HelloStory.APIGateway/bin/Release/net6.0/linux-x64.zip"
+}
+
+resource "aws_s3_object" "lambda_hello_story_api_gateway" {
+  bucket = aws_s3_bucket.hello_story.id
+
+  key    = "hello-story-api-gateway.zip"
+  source = data.archive_file.lambda_hello_story_api_gateway.output_path
+
+  etag = filemd5(data.archive_file.lambda_hello_story_api_gateway.output_path)
+}
+
 data "archive_file" "lambda_hello_story_authflow_api" {
   type = "zip"
 
@@ -25,19 +50,10 @@ data "archive_file" "lambda_hello_story_authflow_api" {
 }
 
 resource "aws_s3_object" "lambda_hello_story_authflow_api" {
-  bucket = aws_s3_bucket.hello_story_authflow_api.id
+  bucket = aws_s3_bucket.hello_story.id
 
   key    = "hello-story-authflow-api.zip"
   source = data.archive_file.lambda_hello_story_authflow_api.output_path
 
   etag = filemd5(data.archive_file.lambda_hello_story_authflow_api.output_path)
-}
-
-resource "random_pet" "lambda_bucket_name" {
-  prefix = "hello-story-authflow-api"
-  length = 4
-}
-
-resource "aws_s3_bucket" "hello_story_authflow_api" {
-  bucket = random_pet.lambda_bucket_name.id
 }
