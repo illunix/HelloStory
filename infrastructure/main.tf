@@ -15,11 +15,6 @@ module "rds" {
 }
 */
 
-
 module "lambda" {
   source = "./resources/lambda"
-}
-
-module "api-gateway" {
-  source = "./resources/api-gateway"
 }

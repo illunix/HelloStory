@@ -12,14 +12,19 @@ terraform {
   required_version = "~> 1.0"
 }
 
-module "s3" {
-  source = "../s3"
-}
-
 module "iam" {
   source = "../iam"
 }
 
+module "s3" {
+  source = "../s3"
+}
+
+module "api_gateway" {
+  source = "../api-gateway"
+}
+
+#region lambdas
 #region hello_story_api_gateway
 resource "aws_lambda_function" "hello_story_api_gateway" {
   function_name = "hello-story-api-gateway"
@@ -34,13 +39,31 @@ resource "aws_lambda_function" "hello_story_api_gateway" {
 
   source_code_hash = module.s3.data_archive_file_lambda_hello_story_api_gateway.output_base64sha256
 
-  role = module.iam.aws_iam_role_lambda_exec_arn
+  role = module.iam.iam_for_lambda_arn
 }
 
 resource "aws_lambda_function_url" "hello_story_api_gateway" {
   function_name      = aws_lambda_function.hello_story_api_gateway.function_name
   authorization_type = "NONE"
 }
+
+resource "aws_lambda_permission" "api_gateway" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.hello_story_api_gateway.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${module.api_gateway.aws_apigatewayv2_api_hello_story.execution_arn}/*/*"
+}
+
+resource "aws_apigatewayv2_integration" "hello_story_api_gateway" {
+  api_id = module.api_gateway.aws_apigatewayv2_api_hello_story.id
+
+  integration_uri    = aws_lambda_function.hello_story_api_gateway.invoke_arn
+  integration_type   = "AWS_PROXY"
+  integration_method = "POST"
+}
+
 #endregion
 
 #region hello_story_authflow_api
@@ -57,11 +80,38 @@ resource "aws_lambda_function" "hello_story_authflow_api" {
 
   source_code_hash = module.s3.data_archive_file_lambda_hello_story_authflow_api.output_base64sha256
 
-  role = module.iam.aws_iam_role_lambda_exec_arn
+  role = module.iam.iam_for_lambda_arn
 }
 
 resource "aws_lambda_function_url" "hello_story_authflow_api" {
   function_name      = aws_lambda_function.hello_story_authflow_api.function_name
   authorization_type = "NONE"
 }
+
+resource "aws_lambda_permission" "api_authflow" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.hello_story_authflow_api.function_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${module.api_gateway.aws_apigatewayv2_api_hello_story.execution_arn}/*/*"
+}
+
+resource "aws_apigatewayv2_integration" "hello_story_api_authflow" {
+  api_id = module.api_gateway.aws_apigatewayv2_api_hello_story.id
+
+  integration_uri    = aws_lambda_function.hello_story_authflow_api.invoke_arn
+  integration_type   = "AWS_PROXY"
+  integration_method = "POST"
+}
+
+#region routes
+resource "aws_apigatewayv2_route" "hello_story_authflow_api_sign_in" {
+  api_id    = module.api_gateway.aws_apigatewayv2_api_hello_story.id
+  route_key = "GET /weatherforecast"
+  target    = "integrations/${aws_apigatewayv2_integration.hello_story_api_authflow.id}"
+}
+
+#endregion
+#endregion
 #endregion
