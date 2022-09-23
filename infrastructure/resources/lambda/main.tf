@@ -24,6 +24,10 @@ module "api_gateway" {
   source = "../api-gateway"
 }
 
+module "kms" {
+  source = "../kms"
+}
+
 #region lambdas
 #region hello_story_api_gateway
 resource "aws_lambda_function" "hello_story_api_gateway" {
@@ -40,6 +44,16 @@ resource "aws_lambda_function" "hello_story_api_gateway" {
   source_code_hash = module.s3.data_archive_file_lambda_hello_story_api_gateway.output_base64sha256
 
   role = module.iam.iam_for_lambda_arn
+
+  environment {
+    variables = {
+      issuer = var.issuer
+      audience = var.audience
+      secret_key = var.secret_key
+    }
+  }
+
+  kms_key_arn = module.kms.aws_kms_key_default_arn
 }
 
 resource "aws_lambda_function_url" "hello_story_api_gateway" {

@@ -17,4 +17,7 @@ module "rds" {
 
 module "lambda" {
   source = "./resources/lambda"
+  issuer = var.issuer
+  audience = var.audience
+  secret_key = var.secret_key
 }

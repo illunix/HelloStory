@@ -41,7 +41,7 @@ internal sealed class Function
 
         return new()
         {
-            PrincipalID = claimsPrincipal() == null ? "401" : claimsPrincipal()?.FindFirst(ClaimTypes.NameIdentifier)?.Value,
+            PrincipalID = claimsPrincipal() is null ? "401" : claimsPrincipal()?.FindFirst(ClaimTypes.NameIdentifier)?.Value,
             PolicyDocument = new()
             {
                 Statement = new()
