@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 namespace HelloStory.Shared.API.CodeGeneration;
 
 [Generator]
-internal class SourceGenerator : ISourceGenerator
+internal sealed class SourceGenerator : ISourceGenerator
 {
     public void Initialize(GeneratorInitializationContext ctx)
         => ctx.RegisterForSyntaxNotifications(() => new SyntaxReceiver());

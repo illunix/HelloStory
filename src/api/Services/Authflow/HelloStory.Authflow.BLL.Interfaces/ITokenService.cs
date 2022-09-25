@@ -2,6 +2,6 @@
 
 public interface ITokenService
 {
-    string GenerateAccessToken(string userId);
+    string GenerateAccessToken(Guid userId);
     string GenerateRefreshToken();
 }

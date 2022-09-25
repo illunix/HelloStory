@@ -11,7 +11,7 @@ public sealed partial class TokenService : ITokenService
 {
     private readonly IOptions<JwtOptions> _options;
 
-    public string GenerateAccessToken(string userId)
+    public string GenerateAccessToken(Guid userId)
         => new JwtSecurityTokenHandler().WriteToken(
                 new JwtSecurityToken(
                     _options.Value.Issuer,
@@ -19,7 +19,7 @@ public sealed partial class TokenService : ITokenService
                     new Claim[] {
                         new(
                             ClaimTypes.NameIdentifier,
-                            userId
+                            userId.ToString()
                         ),
                         new(
                             JwtRegisteredClaimNames.Jti,

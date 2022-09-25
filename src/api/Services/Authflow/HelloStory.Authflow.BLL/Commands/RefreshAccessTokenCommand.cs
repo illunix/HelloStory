@@ -2,7 +2,4 @@
 
 namespace HelloStory.Authflow.BLL.Commands;
 
-public readonly record struct RefreshAccessTokenCommand(
-    Guid CurrentUserId,
-    string RefreshToken
-) : IHttpRequest;
+public readonly record struct RefreshAccessTokenCommand(Guid CurrentUserId) : IHttpRequest;

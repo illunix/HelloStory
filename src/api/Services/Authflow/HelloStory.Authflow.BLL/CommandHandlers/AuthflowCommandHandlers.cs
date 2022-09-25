@@ -48,7 +48,7 @@ public sealed partial class AuthflowCommandHandlers :
         if  (user is null)
             throw new InvalidCredentialsException();
 
-        var validatePassword = () =>
+        var validPassword = () =>
         {
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 req.Password,
@@ -60,7 +60,7 @@ public sealed partial class AuthflowCommandHandlers :
         };
 
 
-        if (!validatePassword())
+        if (!validPassword())
             throw new InvalidCredentialsException();
 
         await _cache.AddAsync(
@@ -69,7 +69,7 @@ public sealed partial class AuthflowCommandHandlers :
             (int)_options.Value.ValidFor.TotalSeconds
         );
 
-        return Results.Ok(new AccessTokenDTO(_tokenService.GenerateAccessToken(user.Id.ToString())));
+        return Results.Ok(new AccessTokenDTO(_tokenService.GenerateAccessToken(user.Id)));
     }
 
     [HttpPost("token/refresh")]
@@ -82,13 +82,15 @@ public sealed partial class AuthflowCommandHandlers :
         if (refreshToken is null)
             throw new InvalidRefreshTokenException();
 
-        _cache.Add(
+        await _cache.RemoveAsync(req.CurrentUserId.ToString());
+
+        await _cache.AddAsync(
             req.CurrentUserId.ToString(),
             _tokenService.GenerateRefreshToken(),
             (int)_options.Value.ValidFor.TotalSeconds
         );
 
-        return Results.Ok(req.CurrentUserId);
+        return Results.Ok(new AccessTokenDTO(_tokenService.GenerateAccessToken(req.CurrentUserId)));
     }
 
     [HttpDelete("token/revoke")]
