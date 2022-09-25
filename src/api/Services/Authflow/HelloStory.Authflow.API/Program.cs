@@ -1,6 +1,8 @@
 using FluentValidation;
 using HelloStory.Authflow.API.Extensions;
 using HelloStory.Authflow.BLL.Commands;
+using HelloStory.Authflow.BLL.Interfaces;
+using HelloStory.Authflow.BLL.Services;
 using HelloStory.Authflow.Common.Options;
 using HelloStory.DAL.Context;
 using MediatR;
@@ -28,6 +30,8 @@ builder.Services
         q => q.AsScoped(),
         typeof(SignInCommand)
     )
+    .AddEnyimMemcached()
+    .AddSingleton<ITokenService, TokenService>()
 #if DEBUG
     .AddEndpointsApiExplorer()
     .AddSwaggerGen();

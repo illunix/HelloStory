@@ -43,13 +43,12 @@ resource "aws_s3_object" "lambda_hello_story_api_gateway_authorizer" {
   etag = filemd5(data.archive_file.lambda_hello_story_api_gateway_authorizer.output_path)
 }
 #endregion
-
 #region hello_story_authflow_api
 data "archive_file" "lambda_hello_story_authflow_api" {
   type = "zip"
 
-  source_dir  = "${path.module}/../../../src/api/Services/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64"
-  output_path = "${path.module}/../../../src/api/Services/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64.zip"
+  source_dir  = "${path.module}/../../../src/api/Services/Authflow/HelloStory.Authflow.API/bin/Release/net7.0/linux-x64"
+  output_path = "${path.module}/../../../src/api/Services/Authflow/HelloStory.Authflow.API/bin/Release/net7.0/linux-x64.zip"
 }
 
 resource "aws_s3_object" "lambda_hello_story_authflow_api" {
@@ -59,5 +58,22 @@ resource "aws_s3_object" "lambda_hello_story_authflow_api" {
   source = data.archive_file.lambda_hello_story_authflow_api.output_path
 
   etag = filemd5(data.archive_file.lambda_hello_story_authflow_api.output_path)
+}
+#endregion
+#region hello_story_authflow_api
+data "archive_file" "lambda_hello_story_user_api" {
+  type = "zip"
+
+  source_dir  = "${path.module}/../../../src/api/Services/User/HelloStory.User.API/bin/Release/net7.0/linux-x64"
+  output_path = "${path.module}/../../../src/api/Services/User/HelloStory.User.API/bin/Release/net7.0/linux-x64.zip"
+}
+
+resource "aws_s3_object" "lambda_hello_story_user_api" {
+  bucket = aws_s3_bucket.hello_story.id
+
+  key    = "hello-story-user-api.zip"
+  source = data.archive_file.lambda_hello_story_user_api.output_path
+
+  etag = filemd5(data.archive_file.lambda_hello_story_user_api.output_path)
 }
 #endregion
