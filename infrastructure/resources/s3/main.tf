@@ -30,8 +30,8 @@ resource "aws_s3_bucket" "hello_story" {
 data "archive_file" "lambda_hello_story_api_gateway_authorizer" {
   type = "zip"
 
-  source_dir  = "${path.module}/../../../src/api/Gateway/HelloStory.APIGatway/bin/Release/net6.0/linux-x64"
-  output_path = "${path.module}/../../../src/api/Gateway/HelloStory.APIGateway/bin/Release/net6.0/linux-x64.zip"
+  source_dir  = "${path.module}/../../../src/api/Gateway/HelloStory.APIGatwayAuthorizer/bin/Release/net6.0/linux-x64"
+  output_path = "${path.module}/../../../src/api/Gateway/HelloStory.APIGatwayAuthorizer/bin/Release/net6.0/linux-x64.zip"
 }
 
 resource "aws_s3_object" "lambda_hello_story_api_gateway_authorizer" {
@@ -48,8 +48,8 @@ resource "aws_s3_object" "lambda_hello_story_api_gateway_authorizer" {
 data "archive_file" "lambda_hello_story_authflow_api" {
   type = "zip"
 
-  source_dir  = "${path.module}/../../../src/api/Features/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64"
-  output_path = "${path.module}/../../../src/api/Features/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64.zip"
+  source_dir  = "${path.module}/../../../src/api/Services/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64"
+  output_path = "${path.module}/../../../src/api/Services/Authflow/HelloStory.Authflow.API/bin/Release/net6.0/linux-x64.zip"
 }
 
 resource "aws_s3_object" "lambda_hello_story_authflow_api" {

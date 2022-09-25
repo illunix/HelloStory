@@ -1,35 +1,26 @@
 using HelloStory.Authflow.API.Extensions;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+builder.Services
+#if DEBUG
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGen();
+#endif
+#if RELEASE
+    .AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+#endif  
 
 var app = builder.Build();
 
+#if DEBUG
+app
+    .UseSwagger()
+    .UseSwaggerUI();
+#endif
+
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.MapEndpoints();
 
 app.Run();
-
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

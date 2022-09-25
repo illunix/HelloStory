@@ -122,7 +122,19 @@ resource "aws_apigatewayv2_integration" "hello_story_api_authflow" {
 #region routes
 resource "aws_apigatewayv2_route" "hello_story_authflow_api_sign_in" {
   api_id    = module.api_gateway.aws_apigatewayv2_api_hello_story.id
-  route_key = "GET /weatherforecast"
+  route_key = "POST /authflow/sign-in"
+  target    = "integrations/${aws_apigatewayv2_integration.hello_story_api_authflow.id}"
+}
+
+resource "aws_apigatewayv2_route" "hello_story_authflow_api_refresh_token" {
+  api_id    = module.api_gateway.aws_apigatewayv2_api_hello_story.id
+  route_key = "POST /authflow/token/refresh"
+  target    = "integrations/${aws_apigatewayv2_integration.hello_story_api_authflow.id}"
+}
+
+resource "aws_apigatewayv2_route" "hello_story_authflow_api_revoke_token" {
+  api_id    = module.api_gateway.aws_apigatewayv2_api_hello_story.id
+  route_key = "POST /authflow/token/revoke"
   target    = "integrations/${aws_apigatewayv2_integration.hello_story_api_authflow.id}"
 }
 

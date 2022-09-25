@@ -123,7 +123,7 @@ internal class SourceGenerator : ISourceGenerator
             ""{route}"",
             async (
                 {(getCurrentUser ? "ClaimsPrincipal user,\n\t\t\t\t" : "")}[AsParameters] {requestTypeType} req,
-                IMediator mediator
+                [FromServices] IMediator mediator
             )
                 => await mediator.Send(req{(getCurrentUser ? @" with { CurrentUserId = Guid.Parse(user.Claims.FirstOrDefault(q => q.Type == ClaimTypes.NameIdentifier).Value)}" : "")})
             ){(validate ? "" : $".AddEndpointFilter<ValidationFilter<{requestTypeType}>>()")}.WithTags(""{handlerName}"");"
