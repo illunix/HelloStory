@@ -30,17 +30,9 @@ internal class SourceGenerator : ISourceGenerator
         );
 
         ctx.AddSource(
-            "HumanExpBook.API.Extensions.g.cs",
+            "HelloStory.API.Extensions.g.cs",
             SourceText.From(
                 GenerateExtensions(methods),
-                Encoding.UTF8
-            )
-        );
-
-        ctx.AddSource(
-            "HumanExpBook.API.Filters.g.cs",
-            SourceText.From(
-                GenerateValidationFilter(),
                 Encoding.UTF8
             )
         );
@@ -141,6 +133,8 @@ internal class SourceGenerator : ISourceGenerator
             return sb.ToString();
         };
 
+        var serviceName = methods.First().ContainingNamespace.ContainingNamespace.ContainingNamespace.Name;
+
         var sb = new StringBuilder();
 
         sb.AppendLine(
@@ -149,9 +143,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using HumanExpBook.API.Filters;
+using HelloStory.Shared.API.Filters;
 
-namespace HumanExpBook.API.Extensions;
+namespace HelloStory.{serviceName}.API.Extensions;
 
 public static class ApiExtensions
 {{
@@ -163,56 +157,6 @@ public static class ApiExtensions
 }}
 "
         );
-
-        return sb.ToString();
-    }
-
-    private static string GenerateValidationFilter()
-    {
-        var sb = new StringBuilder();
-
-        sb.AppendLine(
-@"using FluentValidation;
-using Microsoft.AspNetCore.Http;
-
-namespace HumanExpBook.API.Filters;
-
-internal class ValidationFilter<T> : IEndpointFilter
-{
-    private readonly IValidator<T> _validator;
-
-    public ValidationFilter(IValidator<T> validator)
-    {
-        _validator = validator;
-    }
-
-    public virtual async ValueTask<object?> InvokeAsync(
-        EndpointFilterInvocationContext ctx,
-        EndpointFilterDelegate next
-    )
-    {
-        var parameter = ctx.GetArgument<T>(0);
-        if (parameter is null)
-        {
-            return Results.BadRequest(""The parameter is invalid."");
-        }
-
-        var validationResult = await _validator.ValidateAsync((T)parameter);
-        if (!validationResult.IsValid)
-        {
-            var result = new
-            {
-                Message = ""Validation errors"",
-                Errors = validationResult.Errors.Select(q => q.ErrorMessage)
-            };
-
-            return Results.BadRequest(result);
-        }
-
-        return await next(ctx);
-    }
-}"
-    );
 
         return sb.ToString();
     }

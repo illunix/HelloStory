@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Generated\**" />
+    <EmbeddedResource Remove="Generated\**" />
+    <None Remove="Generated\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoDependencyInjection" Version="1.0.2" />
     <PackageReference Include="EnyimMemcachedCore" Version="2.5.4" />
     <PackageReference Include="FluentValidation" Version="11.2.2" />
@@ -14,8 +20,14 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.23.1" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
+	</PropertyGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\HelloStory.API.CodeGeneration\HelloStory.Shared.API.CodeGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\..\..\Shared\HelloStory.API.Shared\HelloStory.Shared.API.csproj" />
     <ProjectReference Include="..\..\..\Shared\HelloStory.DAL\HelloStory.DAL.csproj" />
     <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.API.Interfaces\HelloStory.Shared.BLL.Interfaces.csproj" />
     <ProjectReference Include="..\HelloStory.Authflow.BLL.Interfaces\HelloStory.Authflow.BLL.Interfaces.csproj" />

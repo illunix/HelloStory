@@ -17,4 +17,8 @@
 		<PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.2.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\HelloStory.Authflow.BLL\HelloStory.Authflow.BLL.csproj" />
+	</ItemGroup>
+
 </Project>

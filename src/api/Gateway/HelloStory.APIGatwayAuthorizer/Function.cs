@@ -7,7 +7,7 @@ using System.Text;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
-namespace HelloStory.APIGatway;
+namespace HelloStory.APIGatwayAuthorizer;
 
 internal sealed class Function
 {

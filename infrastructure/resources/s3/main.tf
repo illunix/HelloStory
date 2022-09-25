@@ -26,21 +26,21 @@ resource "aws_s3_bucket" "hello_story" {
   bucket = random_pet.lambda_bucket_name.id
 }
 
-#region hello_story_api_gateway
-data "archive_file" "lambda_hello_story_api_gateway" {
+#region hello_story_api_gateway_authorizer
+data "archive_file" "lambda_hello_story_api_gateway_authorizer" {
   type = "zip"
 
   source_dir  = "${path.module}/../../../src/api/Gateway/HelloStory.APIGatway/bin/Release/net6.0/linux-x64"
   output_path = "${path.module}/../../../src/api/Gateway/HelloStory.APIGateway/bin/Release/net6.0/linux-x64.zip"
 }
 
-resource "aws_s3_object" "lambda_hello_story_api_gateway" {
+resource "aws_s3_object" "lambda_hello_story_api_gateway_authorizer" {
   bucket = aws_s3_bucket.hello_story.id
 
   key    = "hello-story-api-gateway.zip"
-  source = data.archive_file.lambda_hello_story_api_gateway.output_path
+  source = data.archive_file.lambda_hello_story_api_gateway_authorizer.output_path
 
-  etag = filemd5(data.archive_file.lambda_hello_story_api_gateway.output_path)
+  etag = filemd5(data.archive_file.lambda_hello_story_api_gateway_authorizer.output_path)
 }
 #endregion
 
