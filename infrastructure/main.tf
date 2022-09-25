@@ -9,11 +9,9 @@ terraform {
   required_version = "~> 1.0"
 }
 
-/*
 module "rds" {
   source = "./resources/rds"
 }
-*/
 
 module "lambda" {
   source = "./resources/lambda"

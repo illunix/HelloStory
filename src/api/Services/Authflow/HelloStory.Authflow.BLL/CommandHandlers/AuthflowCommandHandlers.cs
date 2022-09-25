@@ -58,8 +58,6 @@ public sealed partial class AuthflowCommandHandlers :
                 256 / 8
             )) == user.Password;
         };
-
-
         if (!validPassword())
             throw new InvalidCredentialsException();
 
