@@ -1,5 +1,5 @@
-﻿using HelloStory.DAL.Context;
-using HelloStory.DAL.Enities;
+﻿using HelloStory.Shared.DAL.Context;
+using HelloStory.Shared.DAL.Enities;
 using HelloStory.Shared.BLL.Exceptions;
 using HelloStory.Shared.BLL.Interfaces;
 using HelloStory.User.BLL.Commands;
@@ -7,12 +7,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HelloStory.User.BLL.CommandHandlers;
 
@@ -31,6 +26,12 @@ public sealed partial class UserCommandHandlers :
             throw new EntityWithSamePropertyValueAlreadyExistException(
                 nameof(UserEntity),
                 nameof(UserEntity.Email)
+            );
+
+        if (await _ctx.Users.AnyAsync(q => q.Username == req.Username))
+            throw new EntityWithSamePropertyValueAlreadyExistException(
+                nameof(UserEntity),
+                nameof(UserEntity.Username)
             );
 
         var bytes = () =>

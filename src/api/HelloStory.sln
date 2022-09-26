@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloStory.Shared.API.CodeG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloStory.Shared.BLL.Interfaces", "Shared\HelloStory.Shared.API.Interfaces\HelloStory.Shared.BLL.Interfaces.csproj", "{4B24E77E-A166-49D1-AA17-7567F3C98C5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloStory.DAL", "Shared\HelloStory.DAL\HelloStory.DAL.csproj", "{F79D5CE7-DAFC-4A0F-8717-238BBC5D567D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloStory.Shared.DAL", "Shared\HelloStory.DAL\HelloStory.Shared.DAL.csproj", "{F79D5CE7-DAFC-4A0F-8717-238BBC5D567D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloStory.Shared.API", "Shared\HelloStory.API.Shared\HelloStory.Shared.API.csproj", "{AC20E5F5-DDF0-4985-A31E-30F4A868EE8D}"
 EndProject

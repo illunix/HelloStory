@@ -1,7 +1,7 @@
-﻿using HelloStory.DAL.Enities;
+﻿using HelloStory.Shared.DAL.Enities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HelloStory.DAL.Context;
+namespace HelloStory.Shared.DAL.Context;
 
 public sealed class HelloStoryContext : DbContext
 {

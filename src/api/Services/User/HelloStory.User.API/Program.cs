@@ -1,9 +1,10 @@
 using FluentValidation;
-using HelloStory.DAL.Context;
+using HelloStory.Shared.DAL.Context;
 using HelloStory.User.BLL.Commands;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using HelloStory.User.API.Extensions;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -22,6 +23,13 @@ builder.Services
 #if RELEASE
     .AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 #endif  
+
+builder.Logging
+    .ClearProviders()
+    .AddSerilog(new LoggerConfiguration()
+        .WriteTo.Console()
+        .CreateLogger()
+    );
 
 var app = builder.Build();
 

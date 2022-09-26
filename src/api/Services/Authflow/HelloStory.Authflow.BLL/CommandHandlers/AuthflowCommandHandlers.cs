@@ -5,7 +5,7 @@ using HelloStory.Authflow.BLL.Interfaces;
 using HelloStory.Authflow.BLL.Services;
 using HelloStory.Authflow.Common.DTO;
 using HelloStory.Authflow.Common.Options;
-using HelloStory.DAL.Context;
+using HelloStory.Shared.DAL.Context;
 using HelloStory.Shared.BLL.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;

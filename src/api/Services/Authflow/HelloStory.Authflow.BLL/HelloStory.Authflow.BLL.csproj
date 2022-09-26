@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\HelloStory.API.CodeGeneration\HelloStory.Shared.API.CodeGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
     <ProjectReference Include="..\..\..\Shared\HelloStory.API.Shared\HelloStory.Shared.API.csproj" />
-    <ProjectReference Include="..\..\..\Shared\HelloStory.DAL\HelloStory.DAL.csproj" />
+    <ProjectReference Include="..\..\..\Shared\HelloStory.DAL\HelloStory.Shared.DAL.csproj" />
     <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.API.Interfaces\HelloStory.Shared.BLL.Interfaces.csproj" />
     <ProjectReference Include="..\HelloStory.Authflow.BLL.Interfaces\HelloStory.Authflow.BLL.Interfaces.csproj" />
     <ProjectReference Include="..\HelloStory.Authflow.Common\HelloStory.Authflow.Common.csproj" />

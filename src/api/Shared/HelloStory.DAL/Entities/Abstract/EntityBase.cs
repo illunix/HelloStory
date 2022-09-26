@@ -1,4 +1,4 @@
-﻿namespace HelloStory.DAL.Entities.Abstract;
+﻿namespace HelloStory.Shared.DAL.Entities.Abstract;
 
 public record EntityBase
 {

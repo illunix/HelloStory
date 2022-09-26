@@ -1,6 +1,6 @@
-﻿using HelloStory.DAL.Entities.Abstract;
+﻿using HelloStory.Shared.DAL.Entities.Abstract;
 
-namespace HelloStory.DAL.Enities;
+namespace HelloStory.Shared.DAL.Enities;
 
 public sealed record UserEntity(
     string Email,
