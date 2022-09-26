@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using HelloStory.Authflow.BLL.Interfaces;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using HelloStory.Authflow.Common.Options;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace HelloStory.Authflow.BLL.Services;
 

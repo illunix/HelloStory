@@ -139,6 +139,7 @@ resource "aws_apigatewayv2_route" "hello_story_authflow_api_revoke_token" {
 }
 
 #endregion
+#endregion
 #region hello_story_user_api
 resource "aws_lambda_function" "hello_story_user_api" {
   function_name = "hello-story-user-api"
@@ -181,8 +182,8 @@ resource "aws_apigatewayv2_integration" "hello_story_api_user" {
 #region routes
 resource "aws_apigatewayv2_route" "hello_story_api_user_sign_up" {
   api_id    = module.api_gateway.aws_apigatewayv2_api_hello_story.id
-  route_key = "POST /authflow/sign-in"
-  target    = "integrations/${aws_apigatewayv2_integration.hello_story_api_authflow.id}"
+  route_key = "POST /user/sign-up"
+  target    = "integrations/${aws_apigatewayv2_integration.hello_story_api_user.id}"
 }
 #endregion
 #endregion

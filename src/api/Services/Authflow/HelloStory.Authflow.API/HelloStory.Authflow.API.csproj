@@ -18,10 +18,15 @@
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="System.Collections" Version="4.3.0" />
+		<PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+		<PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+		<PackageReference Include="System.Runtime.Extensions" Version="4.3.1" />
+		<PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\HelloStory.Authflow.BLL\HelloStory.Authflow.BLL.csproj" />
+		<ProjectReference Include="..\HelloStory.Authflow.BLL\HelloStory.Authflow.BLL.csproj" />
 	</ItemGroup>
 
 </Project>
