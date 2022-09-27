@@ -17,11 +17,6 @@ terraform {
   required_version = "~> 1.0"
 }
 
-provider "aws" {
-  region = "eu-west-2"
-}
-
-
 resource "random_pet" "lambda_bucket_name" {
   prefix = "hello-story-lambdas"
   length = 4

@@ -12,10 +12,6 @@ terraform {
   required_version = "~> 1.0"
 }
 
-provider "aws" {
-  region = "eu-west-2"
-}
-
 resource "aws_kms_key" "default" {
   description             = "KMS key 1"
 }
