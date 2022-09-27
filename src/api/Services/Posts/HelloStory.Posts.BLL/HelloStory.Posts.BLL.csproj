@@ -16,11 +16,8 @@
 	  <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.API.Interfaces\HelloStory.Shared.BLL.Interfaces.csproj" />
 	  <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.BLL.Exceptions\HelloStory.Shared.BLL.Exceptions.csproj" />
     <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.API.Interfaces\HelloStory.Shared.BLL.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.DAL\HelloStory.Shared.DAL.csproj" />
     <ProjectReference Include="..\HelloStory.Posts.Common\HelloStory.Posts.Common.csproj" />
-  </ItemGroup>
-	
-  <ItemGroup>
-    <Folder Include="CommandHandlers\" />
   </ItemGroup>
 
 </Project>

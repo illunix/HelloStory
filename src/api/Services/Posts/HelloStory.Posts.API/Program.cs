@@ -1,8 +1,10 @@
 using FluentValidation;
+using HelloStory.Posts.BLL.Commands;
 using HelloStory.Shared.DAL.Context;
+using HelloStory.Posts.API.Extensions;
+
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using HelloStory.Posts.API.Extensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,12 +13,10 @@ var configuration = builder.Configuration;
 builder.Services
     .AddDbContext<HelloStoryContext>(q => q.UseNpgsql(configuration["dbConnectionString"]!))
     .AddValidatorsFromAssemblyContaining<Program>()
-    /*
     .AddMediatR(
         q => q.AsScoped(),
-        typeof(SignUpCommand)
+        typeof(CreatePostCommand)
     )
-    */
 #if DEBUG
     .AddEndpointsApiExplorer()
     .AddSwaggerGen();

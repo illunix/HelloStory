@@ -4,6 +4,7 @@ using HelloStory.Shared.BLL.Interfaces;
 using HelloStory.Shared.DAL.Context;
 using HelloStory.Shared.DAL.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HelloStory.Posts.BLL.CommandHandlers;
@@ -16,6 +17,7 @@ public sealed partial class PostsCommandHandlers :
 {
     private readonly HelloStoryContext _ctx;
 
+    [HttpPost]
     public async Task<IResult> Handle(
         CreatePostCommand req,
         CancellationToken ct
@@ -31,6 +33,7 @@ public sealed partial class PostsCommandHandlers :
         return Results.Ok();
     }
 
+    [HttpPut]
     public async Task<IResult> Handle(
         UpdatePostCommand req,
         CancellationToken ct
@@ -50,6 +53,7 @@ public sealed partial class PostsCommandHandlers :
         return Results.Ok();
     }
 
+    [HttpDelete]
     public async Task<IResult> Handle(
         DeletePostCommand req,
         CancellationToken ct
@@ -66,6 +70,7 @@ public sealed partial class PostsCommandHandlers :
         return Results.Ok();
     }
 
+    [HttpPost("like")]
     public async Task<IResult> Handle(
         LikePostCommand req,
         CancellationToken ct
