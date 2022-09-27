@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoDependencyInjection" Version="1.0.2" />
+    <PackageReference Include="EnyimMemcachedCore" Version="2.5.4" />
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0-rc.1.22426.10" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
+    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.23.0" />
+    <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Extensions" Version="4.3.1" />
+    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\HelloStory.API.CodeGeneration\HelloStory.Shared.API.CodeGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+    <ProjectReference Include="..\..\..\Shared\HelloStory.API.Shared\HelloStory.Shared.API.csproj" />
+    <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.API.Interfaces\HelloStory.Shared.BLL.Interfaces.csproj" />
+    <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.DAL\HelloStory.Shared.DAL.csproj" />
+    <ProjectReference Include="..\HelloStory.Authflow.BLL.Interfaces\HelloStory.Authflow.BLL.Interfaces.csproj" />
+    <ProjectReference Include="..\HelloStory.Authflow.Common\HelloStory.Authflow.Common.csproj" />
+  </ItemGroup>
+
+</Project>
