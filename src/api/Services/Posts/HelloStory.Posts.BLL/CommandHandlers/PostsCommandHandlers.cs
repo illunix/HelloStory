@@ -4,13 +4,15 @@ using HelloStory.Shared.BLL.Interfaces;
 using HelloStory.Shared.DAL.Context;
 using HelloStory.Shared.DAL.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace HelloStory.Posts.BLL.CommandHandlers;
 
 public sealed partial class PostsCommandHandlers :
     IHttpRequestHandler<CreatePostCommand>,
     IHttpRequestHandler<UpdatePostCommand>,
-    IHttpRequestHandler<DeletePostCommand>
+    IHttpRequestHandler<DeletePostCommand>,
+    IHttpRequestHandler<LikePostCommand>
 {
     private readonly HelloStoryContext _ctx;
 
@@ -58,6 +60,27 @@ public sealed partial class PostsCommandHandlers :
             throw new EntityNotFoundException(nameof(PostEntity));
 
         _ctx.Remove(post);
+
+        await _ctx.SaveChangesAsync();
+
+        return Results.Ok();
+    }
+
+    public async Task<IResult> Handle(
+        LikePostCommand req,
+        CancellationToken ct
+    )
+    {
+        if (await _ctx.Posts.AnyAsync(q => q.Id == req.PostId))
+            throw new EntityNotFoundException(nameof(PostEntity));
+
+        if (await _ctx.Users.AnyAsync(q => q.Id == req.UserId))
+            throw new EntityNotFoundException(nameof(PostEntity));
+
+        _ctx.Add(new LikedPostEntity(
+            req.PostId,
+            req.UserId
+        ));
 
         await _ctx.SaveChangesAsync();
 
