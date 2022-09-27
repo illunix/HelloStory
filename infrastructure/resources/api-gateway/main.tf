@@ -9,6 +9,10 @@ terraform {
   required_version = "~> 1.0"
 }
 
+provider "aws" {
+  region = "eu-west-2"
+}
+
 resource "aws_apigatewayv2_api" "hello_story" {
   name          = "hello-story-api-gateway"
   protocol_type = "HTTP"
