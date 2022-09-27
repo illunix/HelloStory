@@ -1,3 +1,2 @@
 # HelloStory
-
-An example of how to make microservices each one hosted on aws lambda with api gateway in .NET 7.0 with custom [MediatR source generator]()
+.NET 7.0 sample microservices app with custom [MediatR source generator]() that runs on AWS Lambda with API Gateway
