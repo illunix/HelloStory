@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoDependencyInjection" Version="1.0.2" />
+	</ItemGroup>
+	
+  <ItemGroup>
+	  <ProjectReference Include="..\..\..\Shared\HelloStory.API.CodeGeneration\HelloStory.Shared.API.CodeGeneration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="true" />
+	  <ProjectReference Include="..\..\..\Shared\HelloStory.API.Shared\HelloStory.Shared.API.csproj" />
+	  <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.API.Interfaces\HelloStory.Shared.BLL.Interfaces.csproj" />
+	  <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.BLL.Exceptions\HelloStory.Shared.BLL.Exceptions.csproj" />
+    <ProjectReference Include="..\..\..\Shared\HelloStory.Shared.API.Interfaces\HelloStory.Shared.BLL.Interfaces.csproj" />
+    <ProjectReference Include="..\HelloStory.Posts.Common\HelloStory.Posts.Common.csproj" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="CommandHandlers\" />
+  </ItemGroup>
+
+</Project>
